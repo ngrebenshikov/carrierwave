@@ -62,7 +62,7 @@ describe CarrierWave::Uploader do
       it "uses the blacklist but shows deprecation" do
         allow(uploader).to receive(:content_type_blacklist).and_return(['image/png'])
 
-        expect(ActiveSupport::Deprecation).to receive(:warn).with('#content_type_blacklist is deprecated, use #content_type_denylist instead.')
+        expect(CarrierWave.deprecator).to receive(:warn).with('#content_type_blacklist is deprecated, use #content_type_denylist instead.')
         expect { uploader.cache!(ruby_file) }.to raise_error(CarrierWave::IntegrityError)
       end
 
